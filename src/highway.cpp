@@ -25,25 +25,9 @@ void Iteration()
 	int key,upkey;
 	memset(temproad,0,sizeof(temproad) );	
 	for(int i=0;i<MAXN-1;i++)
-		for(int j=0;j<1;j++)
+		for(int j=0;j<2;j++)
 		{
-			key=road[i][j]*8+road[i][j+1]*4+road[i+1][j]*2+road[i+1][j+1];
-			upkey=Iteration4point(key);
 			
-			key=upkey;
-			if(key/8>0)
-				temproad[i][j]=1;
-			key=key%8;
-			
-			if(key/4>0)
-				temproad[i][j+1]=1;
-			key=key%4;
-
-			if(key/2>0)
-				temproad[i+1][j]=1;
-			key=key%2;
-
-			temproad[i+1][j+1]=(key>0);
 		}
 	memcpy(road,temproad,sizeof(road) );
 }
