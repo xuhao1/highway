@@ -9,12 +9,18 @@
 #include <fstream>
 #include <vector>
 #include "car.h"
-namespace highway
+class highway
 {
+public:
 	void evoluation();
-	std::vector<double>  getLocation();
-	std::vector<int> getChannel();
-}
+	int num;
+	std::vector<car> xinway;
+	void Iteration();
+	highway():
+		num(0),xinway()
+	{
+	}
+};
 
 
 #endif

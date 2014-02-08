@@ -1,0 +1,1 @@
+g++-4.9 -c display.cpp -std=c++0x -framework GLUT -framework OpenGL -framework Cocoa

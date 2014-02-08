@@ -1,5 +1,6 @@
 highway:highway.o car.o display.o
-	g++-4.9 -o highway highway.o car.o display.o -std=c++0x -framework GLUT -framework OpenGL -framework Cocoa
+	g++-4.9 -o highway highway.o car.o display.o -std=c++0x -framework GLUT -framework OpenGL -framework Cocoa \
+		`pkg-config --libs --cflags glfw3`
 highway.o: highway.cpp highway.h
 	g++-4.9 -c highway.cpp -std=c++0x
 display.o: display.cpp highway.h
