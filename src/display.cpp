@@ -72,7 +72,7 @@ int gl_main(int argc, char *argv[])
 	glutInit(&argc, argv); 
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 	glutInitWindowPosition(500, 100);
-	glutInitWindowSize(2500, 400);
+	glutInitWindowSize(2800, 400);
 	glutCreateWindow("HighWay");
 	glutDisplayFunc(&myDisplay); 
 	glutIdleFunc(&myIdle);

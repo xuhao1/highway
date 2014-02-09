@@ -19,7 +19,7 @@ public:
 	highway():
 		num(0),xinway(),time(0)
 	{
-		xinway.push_back( car((rand()%2+1)*50+50,3,num) );
+		xinway.push_back( car((rand()%2+1)*50+50,1,num,100000) );
 	}
 };
 

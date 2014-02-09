@@ -1,11 +1,16 @@
 #include "car.h"
 #define side 0.01
-#define MAXLANE 4
 void car::adapt(std::vector<car>& way,double time)
 {
 	std::vector<car> left,front,right;
 	double frontmin=1000;
 	int fp=0;
+	if(rand()%1000000<1||broken)
+	{
+		speed=0;
+		broken=1;
+		return;
+	}
 	for(car c:way)
 	{
 		if(c.id==this->id)
@@ -32,7 +37,6 @@ void car::adapt(std::vector<car>& way,double time)
 				right.push_back(c);
 		}
 	}
-
 	if (front.size()>0&& (frontmin<=maxspeed) )
 	{
 		if(lane<MAXLANE-1&&left.size()==0&&fabs(lasw-time)>0.001)
@@ -40,22 +44,40 @@ void car::adapt(std::vector<car>& way,double time)
 			lane++;
 			fp=1;
 			lasw=time;
-			printf("I vc\n");
-		}
-		else
-		{
-			speed-=10;
-			if (speed<0)
-				speed=0;
+			speed+=10;
+			return;
 		}
 	}
-	if(lane>0&&right.size()==0&&fp!=1&&fabs(lasw-time)>0.001)
+	if(front.size()>1&&lane<MAXLANE-1&&left.size()==0)
+	{
+		lane++;
+		lasw=time;
+		speed++;
+		return;
+	}
+
+	if((lane>1||(lane>0 &&rand()%500<1) )&&right.size()==0&&fp!=1&&fabs(lasw-time)>0.001)
 	{
 		lasw=time;
 		lane--;
+		return;
 	}
-	if(front.size()==0&&speed<maxspeed)
+	if(front.size()>0&&(frontmin<=speed))
+	{
+			speed=frontmin;
+			return;
+	}
+	if(lane>0&&right.size()!=0&&speed<maxspeed)
+	{
+		speed+=20;
+		return;
+	}
+	if(front.size()==0&&speed<maxspeed*0.7)
+	{
 		speed+=10;
+	}
+	if(speed>0.7*maxspeed)
+		speed-=10;
 }
 void car::runintdt(double dt)
 {
