@@ -1,6 +1,6 @@
 #include "car.h"
 #define side 0.01
-void car::adapt(std::vector<car>& way,double time)
+void car::adapt(std::vector<car>& way,double time,int num)
 {
 	std::vector<car> left,front,right;
 	double frontmin=1000;
@@ -14,34 +14,36 @@ void car::adapt(std::vector<car>& way,double time)
 		return;
 	}
 	*/
+	//We assume the car has been sort before
 
-	for(car c:way)
+	for(int i=num+1;i<way.size() && way[i].location-location<side;i++)
 	{
-		if(c.id==this->id)
-			continue;
-		if(fabs(c.location-this->location)<side)
+		car c=way[i];
+
+		if(c.lane==this->lane)
 		{
-			if(c.lane==this->lane)
-			{
-				if(c.location>this->location)
-				{
-					front.push_back(c);
-					if(c.speed<frontmin)
-						frontmin=c.speed;
-				}
-				else
-				{
-
-				}
-
-			}
-			if(c.lane==this->lane+1&&(c.location-this->location)<side)
-				left.push_back(c);
-			if(c.lane==this->lane-1&&(c.location-this->location)<side)
-				right.push_back(c);
+			front.push_back(c);
+			if(c.speed<frontmin)
+				frontmin=c.speed;
 		}
+
+		if(c.lane==this->lane+1&&(c.location-this->location)<side)
+			left.push_back(c);
+		if(c.lane==this->lane-1&&(c.location-this->location)<side)
+			right.push_back(c);
 	}
 
+	/*
+	for(int i=num-1;i>=0 && fabs(way[i].location-location)<side;i--)
+	{
+		car c=way[i];
+
+		if(c.lane==this->lane+1&&(c.location-this->location)<side)
+			left.push_back(c);
+		if(c.lane==this->lane-1&&(c.location-this->location)<side)
+			right.push_back(c);
+	}
+	*/
 	if (front.size()>0&& (frontmin<=maxspeed) )
 	{
 		if(lane<MAXLANE-1&&left.size()==0&&fabs(lasw-time)>0.001)

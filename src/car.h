@@ -23,7 +23,7 @@ public:
 		
 	}
 	void runintdt(double dt);
-	void adapt(std::vector<car>&,double time);
+	void adapt(std::vector<car>&,double time,int num);
 };
 /*
 class smallCar:car

@@ -1,4 +1,4 @@
-//#include <GLUT/glut.h>
+#include <GLUT/glut.h>
 #include "time.h"
 #include <sys/time.h>    
 #include <iostream>
@@ -108,4 +108,5 @@ int main(int argc, char *argv[])
 {
 	srand(time(NULL));
 	debug_main(argc,argv);
+	//gl_main(argc,argv);
 }

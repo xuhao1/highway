@@ -17,7 +17,6 @@ public:
 	int num;
 	int randColl;
 	std::vector<car> xinway;
-	void Iteration();
 	double flow;
 	double avsped;
 	highway(double _flow):
@@ -27,6 +26,10 @@ public:
 		randColl =1/(double)(dt*_flow);
 		printf("randcoll:%d\n",randColl);
 	}
+private:
+	void Iteration();
+	void qsort(std::vector<car>&,int l,int r);
+
 };
 
 

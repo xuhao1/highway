@@ -1,7 +1,6 @@
 #include "highway.h"
 #include <omp.h>
 
-#define dt 0.00001
 //First simulate use Margolus neighbor
 //Sand Rule
 
@@ -19,39 +18,43 @@ void highway::evoluation()
 
 void highway::Iteration()
 {
-	double sum[8]={0};
-	int tid=0;
-	std::vector<car*> queue[8];
+	double sum=0;
+	qsort(xinway,0,xinway.size()-1);
+
 	for(int i=0;i<xinway.size();i++)
 	{
-		queue[tid%8].push_back(&xinway[i]);
+		car &c=xinway[i];
+		c.adapt(xinway,time,i);
+		sum+=c.speed;
 	}
+	char c;
 
-#pragma omp parallel num_threads(8)
+	for(car &c:xinway)
 	{
-		tid = omp_get_thread_num();
-		for(car *c:queue[tid])
-		{
-			c->adapt(xinway,time);
-			sum[tid]+=c->speed;
-		}
+		c.runintdt(dt);
 	}
-
-#pragma omp parallel num_threads(8)
-	{
-		tid = omp_get_thread_num();
-		for(car* c:queue[tid])
-		{
-			c->runintdt(dt);
-		}	
-	}
-
-	double avsum=0;
-	for(int i=0;i<8;i++)
-	{
-		avsum+=sum[i];
-	}
-	avsped=avsum/xinway.size();
+	avsped=sum/xinway.size();
 }
 
-
+void highway::qsort(std::vector<car>&a,int l,int r)
+{
+	if(l==r)
+		return;
+	int i,j;
+	i=l;j=r;
+	car k=a[i];
+	while(i<j)
+	{
+		while(i<j&&a[j].location>k.location)
+			j--;
+		a[i]=a[j];
+		while(i<j&&a[i].location<=k.location)
+			i++;
+		a[j]=a[i];
+	}
+	a[i]=k;
+	if(i-l>1)
+		qsort(a,l,i-1);
+	if(r-i>1)
+		qsort(a,i+1,r);
+}
