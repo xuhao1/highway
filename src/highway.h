@@ -1,7 +1,6 @@
 #ifndef __USTC_HIGHWAY_H__
 #define __USTC_HIGHWAY_H__
 
-
 #include "stdio.h"
 #include "stdlib.h"
 #include <iostream>
@@ -13,12 +12,14 @@ class highway
 {
 public:
 	void evoluation();
+	double time;
 	int num;
 	std::vector<car> xinway;
 	void Iteration();
 	highway():
-		num(0),xinway()
+		num(0),xinway(),time(0)
 	{
+		xinway.push_back( car((rand()%2+1)*50+50,3,num) );
 	}
 };
 

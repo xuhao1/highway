@@ -1,34 +1,28 @@
 #include "highway.h"
 
-#define dt 0.01
+#define dt 0.00001
 //First simulate use Margolus neighbor
 //Sand Rule
 
-#define MAXN 100
+#define MAXN 10
 void highway::evoluation()
 {
-	for(int i=0;i<10000;i++)
+	if(rand()%50<1)
 	{
-		if(rand()%10<1)
-		{
-			num++;
-			xinway.push_back( car(rand()%2,100,num) );
-		}
-		if(i% 100==0)
-		{
-			printf("time to %f\n",(double)dt*i);
-			Iteration();
-		}
+		num++;
+		xinway.push_back( car((rand()%2+1)*50+50,rand()%4,num) );
 	}
+	time+=dt;
+	Iteration();
 }
 
 void highway::Iteration()
 {
-	for(car c:xinway)
+	for(car &c:xinway)
 	{
-		c.adapt(xinway);	
+		c.adapt(xinway,time);	
 	}
-	for(car c:xinway)
+	for(car& c:xinway)
 	{
 		c.runintdt(dt);
 	}

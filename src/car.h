@@ -11,13 +11,14 @@ public:
 	float maxspeed;
 	int lane;
 	int id;
+	double lasw=0;
 	car(float _ms,int _lane,int _id):
-		lane(_lane),maxspeed(_ms),id(_id),location(0),speed(0)
+		lane(_lane),maxspeed(_ms),id(_id),location(0),speed(0),lasw(0)
 	{
 		
 	}
 	void runintdt(double dt);
-	void adapt(std::vector<car>&);
+	void adapt(std::vector<car>&,double time);
 };
 
 #endif
