@@ -1,4 +1,5 @@
 #include "highway.h"
+#include <omp.h>
 
 #define dt 0.00001
 //First simulate use Margolus neighbor
@@ -18,17 +19,39 @@ void highway::evoluation()
 
 void highway::Iteration()
 {
-	double sum=0;
-	for(car &c:xinway)
+	double sum[8]={0};
+	int tid=0;
+	std::vector<car*> queue[8];
+	for(int i=0;i<xinway.size();i++)
 	{
-		c.adapt(xinway,time);
-		sum+=c.speed;
+		queue[tid%8].push_back(&xinway[i]);
 	}
-	sum/=xinway.size();
-	avsped=sum;
-	for(car& c:xinway)
+
+#pragma omp parallel num_threads(8)
 	{
-		c.runintdt(dt);
+		tid = omp_get_thread_num();
+		for(car *c:queue[tid])
+		{
+			c->adapt(xinway,time);
+			sum[tid]+=c->speed;
+		}
 	}
+
+#pragma omp parallel num_threads(8)
+	{
+		tid = omp_get_thread_num();
+		for(car* c:queue[tid])
+		{
+			c->runintdt(dt);
+		}	
+	}
+
+	double avsum=0;
+	for(int i=0;i<8;i++)
+	{
+		avsum+=sum[i];
+	}
+	avsped=avsum/xinway.size();
 }
+
 

@@ -1,4 +1,4 @@
-#include <GLUT/glut.h>
+//#include <GLUT/glut.h>
 #include "time.h"
 #include <sys/time.h>    
 #include <iostream>
@@ -9,7 +9,7 @@
 #include <fstream>
 // 太阳、地球和月亮
 // 假设每个月都是 30 天 //一年12个月,共是360天
-highway hw(1000);
+highway hw(10000);
 long getCurrentTime()  
 {  
 	struct timeval tv;  
@@ -20,6 +20,7 @@ long getCurrentTime()
 // 假设每个月都是 12 天 //一年12个月,共是360天
 static int day = 200; // day 的变化:从 0 到 359
 double count=-0.5;
+/*
 void drawCar(car&c)
 {
 	glRectf(-1.0,1,-0.1,0.97);
@@ -80,6 +81,7 @@ int gl_main(int argc, char *argv[])
 	glutMainLoop();
 	return 0;
 }
+*/
 int debug_main(int argc,char *argv[])
 {
 	for(int flow=1000;flow<=10000;flow+=1000)
@@ -89,14 +91,14 @@ int debug_main(int argc,char *argv[])
 		char path[100];
 		sprintf(path,"data/aver%d.txt",flow/1000);
 		std::ofstream of(path);
-		while(hw.time<1.0)
+		while(hw.time<0.6)
 		{
 			hw.evoluation();
 			sum++;
-			if(sum%1000==0)
+			if(sum%100==0)
 			{
 				of<<hw.time<<" "<<hw.avsped<<std::endl;
-				std::cout<<hw.time<<" "<<hw.avsped<<std::endl;
+				std::cout<<flow<<" "<<hw.time<<" "<<hw.avsped<<std::endl;
 			}
 		}
 	}
