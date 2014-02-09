@@ -11,6 +11,8 @@ public:
 	float speed;
 	float maxspeed;
 	int lane;
+	int weight;//kg
+	int mu;//friction
 	int id;
 	int broken=0;
 	int mind;
@@ -23,5 +25,24 @@ public:
 	void runintdt(double dt);
 	void adapt(std::vector<car>&,double time);
 };
-
+/*
+class smallCar:car
+{
+	this.weight=;
+	this.mu=;
+	this.max speed=;
+}
+class mediumCar:car
+{
+	this.weight=;
+	this.mu=;
+	this.max speed=;
+}
+class largeCar:car
+{
+	this.weight=;
+	this.mu=;
+	this.max speed=;
+}
+*/
 #endif

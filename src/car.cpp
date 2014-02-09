@@ -37,6 +37,7 @@ void car::adapt(std::vector<car>& way,double time)
 				right.push_back(c);
 		}
 	}
+
 	if (front.size()>0&& (frontmin<=maxspeed) )
 	{
 		if(lane<MAXLANE-1&&left.size()==0&&fabs(lasw-time)>0.001)
@@ -48,12 +49,20 @@ void car::adapt(std::vector<car>& way,double time)
 			return;
 		}
 	}
-	if(front.size()>1&&lane<MAXLANE-1&&left.size()==0)
+	if(front.size()>1)
 	{
-		lane++;
-		lasw=time;
-		speed++;
-		return;
+		if(lane<MAXLANE-1&&left.size()==0)
+		{
+			lane++;
+			lasw=time;
+			speed+=10;
+			return;
+		}
+		else if(lane>0&&right.size()==0)
+		{
+			lane--;
+			lasw=time;
+		}
 	}
 
 	if((lane>1||(lane>0 &&rand()%500<1) )&&right.size()==0&&fp!=1&&fabs(lasw-time)>0.001)
@@ -64,8 +73,8 @@ void car::adapt(std::vector<car>& way,double time)
 	}
 	if(front.size()>0&&(frontmin<=speed))
 	{
-			speed=frontmin;
-			return;
+		speed=frontmin;
+		return;
 	}
 	if(lane>0&&right.size()!=0&&speed<maxspeed)
 	{
