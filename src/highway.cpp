@@ -7,7 +7,7 @@
 #define MAXN 10
 void highway::evoluation()
 {
-	if(rand()%50<1)
+	if( rand()%randColl <1)
 	{
 		num++;
 		xinway.push_back( car((rand()%2+1)*50+50,rand()%MAXLANE,num,rand()%10*10000) );
@@ -25,7 +25,7 @@ void highway::Iteration()
 		sum+=c.speed;
 	}
 	sum/=xinway.size();
-	printf("AveageSpeed:%f\n",sum);
+	avsped=sum;
 	for(car& c:xinway)
 	{
 		c.runintdt(dt);

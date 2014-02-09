@@ -5,12 +5,16 @@ void car::adapt(std::vector<car>& way,double time)
 	std::vector<car> left,front,right;
 	double frontmin=1000;
 	int fp=0;
+
+	/*
 	if(rand()%1000000<1||broken)
 	{
 		speed=0;
 		broken=1;
 		return;
 	}
+	*/
+
 	for(car c:way)
 	{
 		if(c.id==this->id)
@@ -48,6 +52,8 @@ void car::adapt(std::vector<car>& way,double time)
 			speed+=10;
 			return;
 		}
+		speed=frontmin;
+		return;
 	}
 	if(front.size()>1)
 	{
@@ -62,18 +68,15 @@ void car::adapt(std::vector<car>& way,double time)
 		{
 			lane--;
 			lasw=time;
+			return;
 		}
+
 	}
 
 	if((lane>1||(lane>0 &&rand()%500<1) )&&right.size()==0&&fp!=1&&fabs(lasw-time)>0.001)
 	{
 		lasw=time;
 		lane--;
-		return;
-	}
-	if(front.size()>0&&(frontmin<=speed))
-	{
-		speed=frontmin;
 		return;
 	}
 	if(lane>0&&right.size()!=0&&speed<maxspeed)
