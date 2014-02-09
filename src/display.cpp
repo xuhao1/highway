@@ -20,7 +20,7 @@ long getCurrentTime()
 // 假设每个月都是 12 天 //一年12个月,共是360天
 static int day = 200; // day 的变化:从 0 到 359
 double count=-0.5;
-/*
+
 void drawCar(car&c)
 {
 	glRectf(-1.0,1,-0.1,0.97);
@@ -81,7 +81,7 @@ int gl_main(int argc, char *argv[])
 	glutMainLoop();
 	return 0;
 }
-*/
+
 int debug_main(int argc,char *argv[])
 {
 	for(int flow=1000;flow<=10000;flow+=1000)

@@ -3,3 +3,4 @@
 *.o
 src/highway.dSYM
 src/data/*.txt
+*.txt
