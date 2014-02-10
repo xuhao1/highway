@@ -24,6 +24,7 @@ public:
 	}
 	void runintdt(double dt);
 	void adapt(std::vector<car>&,double time,int num);
+	double distance();
 };
 /*
 class smallCar:car

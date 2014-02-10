@@ -17,7 +17,7 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	*/
 	//We assume the car has been sort before
 
-	for(int i=num+1;i<way.size() && way[i].location-location<side;i++)
+	for(int i=num+1;i<way.size() && way[i].location-location<distance();i++)
 	{
 		car c=way[i];
 
@@ -28,9 +28,9 @@ void car::adapt(std::vector<car>& way,double time,int num)
 				frontmin=c.speed;
 		}
 
-		if(c.lane==this->lane+1&&(c.location-this->location)<side)
+		if(c.lane==this->lane+1&&(c.location-this->location)<distance() )
 			left.push_back(c);
-		if(c.lane==this->lane-1&&(c.location-this->location)<side)
+		if(c.lane==this->lane-1&&(c.location-this->location)<distance() )
 			right.push_back(c);
 	}
 
@@ -73,6 +73,13 @@ void car::adapt(std::vector<car>& way,double time,int num)
 			lasw=time;
 			return;
 		}
+		else
+		{
+			speed-=10;
+			if(speed<0)
+				speed=0;
+			return;
+		}
 
 	}
 
@@ -90,6 +97,7 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	if(front.size()==0&&speed<maxspeed*0.7)
 	{
 		speed+=5;
+		return;
 	}
 	if(speed>0.7*maxspeed)
 		speed-=10;
@@ -97,4 +105,8 @@ void car::adapt(std::vector<car>& way,double time,int num)
 void car::runintdt(double dt)
 {
 	location+=speed*dt;
+}
+double car::distance()
+{
+	return 0.0003*speed+0.001;
 }

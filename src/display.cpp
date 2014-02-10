@@ -7,6 +7,7 @@
 #include "car.h"
 #include "highway.h"
 #include <fstream>
+#define CMD
 // 太阳、地球和月亮
 // 假设每个月都是 30 天 //一年12个月,共是360天
 highway hw(10000);
@@ -97,8 +98,8 @@ int debug_main(int argc,char *argv[])
 			sum++;
 			if(sum%100==0)
 			{
-				of<<hw.time<<" "<<hw.avsped<<" "<<hw.size()<<std::endl;
-				std::cout<<flow<<" "<<hw.time<<" "<<hw.avsped<<std::endl;
+				of<<hw.time<<" "<<hw.avsped<<std::endl;
+				std::cout<<flow<<" "<<hw.time<<" "<<hw.xinway.size()<<" "<<hw.avsped<<std::endl;
 			}
 		}
 	}
@@ -107,6 +108,9 @@ int debug_main(int argc,char *argv[])
 int main(int argc, char *argv[]) 
 {
 	srand(time(NULL));
+#ifdef GL
+	gl_main(argc,argv);
+#else
 	debug_main(argc,argv);
-	//gl_main(argc,argv);
+#endif
 }
