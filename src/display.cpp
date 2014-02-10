@@ -91,13 +91,13 @@ int debug_main(int argc,char *argv[])
 		char path[100];
 		sprintf(path,"data/aver%d.txt",flow/1000);
 		std::ofstream of(path);
-		while(hw.time<0.6)
+		while(hw.time<0.4)
 		{
 			hw.evoluation();
 			sum++;
 			if(sum%100==0)
 			{
-				of<<hw.time<<" "<<hw.avsped<<std::endl;
+				of<<hw.time<<" "<<hw.avsped<<" "<<hw.size()<<std::endl;
 				std::cout<<flow<<" "<<hw.time<<" "<<hw.avsped<<std::endl;
 			}
 		}

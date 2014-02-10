@@ -1,5 +1,6 @@
 #include "car.h"
 #define side 0.01
+#define SWITCHTIME 0.002
 void car::adapt(std::vector<car>& way,double time,int num)
 {
 	std::vector<car> left,front,right;
@@ -46,12 +47,12 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	*/
 	if (front.size()>0&& (frontmin<=maxspeed) )
 	{
-		if(lane<MAXLANE-1&&left.size()==0&&fabs(lasw-time)>0.001)
+		if(lane<MAXLANE-1&&left.size()==0&&fabs(lasw-time)>SWITCHTIME)
 		{
 			lane++;
 			fp=1;
 			lasw=time;
-			speed+=10;
+			speed+=5;
 			return;
 		}
 		speed=frontmin;
@@ -63,7 +64,7 @@ void car::adapt(std::vector<car>& way,double time,int num)
 		{
 			lane++;
 			lasw=time;
-			speed+=10;
+			speed+=5;
 			return;
 		}
 		else if(lane>0&&right.size()==0)
@@ -75,7 +76,7 @@ void car::adapt(std::vector<car>& way,double time,int num)
 
 	}
 
-	if((lane>1||(lane>0 &&rand()%500<1) )&&right.size()==0&&fp!=1&&fabs(lasw-time)>0.001)
+	if((lane>1||(lane>0 &&rand()%500<1) )&&right.size()==0&&fp!=1&&fabs(lasw-time)>SWITCHTIME)
 	{
 		lasw=time;
 		lane--;
@@ -83,12 +84,12 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	}
 	if(lane>0&&right.size()!=0&&speed<maxspeed)
 	{
-		speed+=20;
+		speed+=5;
 		return;
 	}
 	if(front.size()==0&&speed<maxspeed*0.7)
 	{
-		speed+=10;
+		speed+=5;
 	}
 	if(speed>0.7*maxspeed)
 		speed-=10;
