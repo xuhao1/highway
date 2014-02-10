@@ -53,6 +53,8 @@ void car::adapt(std::vector<car>& way,double time,int num)
 			fp=1;
 			lasw=time;
 			speed+=5;
+			if(speed>maxspeed)
+				speed=maxspeed;
 			return;
 		}
 		speed=frontmin;
@@ -65,6 +67,8 @@ void car::adapt(std::vector<car>& way,double time,int num)
 			lane++;
 			lasw=time;
 			speed+=5;
+			if(speed>maxspeed)
+				speed=maxspeed;
 			return;
 		}
 		else if(lane>0&&right.size()==0)
@@ -94,13 +98,17 @@ void car::adapt(std::vector<car>& way,double time,int num)
 		speed+=5;
 		return;
 	}
-	if(front.size()==0&&speed<maxspeed*0.7)
+	if(front.size()==0&&(speed<maxspeed*0.7||mind>70000))
 	{
 		speed+=5;
+		if(speed>maxspeed)
+			speed=maxspeed;
 		return;
 	}
-	if(speed>0.7*maxspeed)
+	if(mind<80001&&speed>0.7*maxspeed)
 		speed-=10;
+	if(speed>maxspeed)
+		speed=maxspeed;
 }
 void car::runintdt(double dt)
 {
