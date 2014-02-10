@@ -2,18 +2,20 @@
 #define side 0.01
 #define SWITCHTIME 0.002
 #define Ethe 4e5
+#define ACCIEDENT 0
 void car::adapt(std::vector<car>& way,double time,int num)
 {
 	std::vector<car> left,front,right;
 	double frontmin=1000;
 	int fp=0;
-
-	if(rand()%1000000<1||broken)
+#if ACCIEDENT==1
+	if(rand()%100000<1||broken)
 	{
 		speed=0;
 		broken=1;
 		return;
 	}
+#endif
 	//
 	//We assume the car has been sort before
 
@@ -56,10 +58,17 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	{
 		if(frontmin<1e-2)
 		{
+#ifdef RIGHTSYS
 			if(lane<MAXLANE-1)
 				lane++;
 			else
 				speed=0;
+#else
+			if(lane>0)
+				lane--;
+			else
+				speed=0;
+#endif
 			return;
 		}
 		if(lane<MAXLANE-1&&left.size()==0&&fabs(lasw-time)>SWITCHTIME)
@@ -131,7 +140,7 @@ void car::runintdt(double dt)
 }
 double car::distance()
 {
-	return 0.0003*speed+0.001;
+	return 0.001*speed+0.001;
 }
 
 

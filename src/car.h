@@ -4,6 +4,8 @@
 #include <vector>
 #include "math.h"
 
+//#define RIGHTSYS
+
 #define MAXLANE 4
 #define BIGCAR 0
 #define MEDCAR 1

@@ -7,10 +7,11 @@
 #include "car.h"
 #include "highway.h"
 #include <fstream>
-#define CMD
+#define DEBUG
+//
 // 太阳、地球和月亮
 // 假设每个月都是 30 天 //一年12个月,共是360天
-highway hw(10000);
+highway hw(5000);
 long getCurrentTime()  
 {  
 	struct timeval tv;  
@@ -107,20 +108,20 @@ int debug_main(int argc,char *argv[])
 		}
 	}
 }
-int leftright
+int leftright(void)
 {
-	highway hw(2000);
+	highway hw(5000);
 	int sum=0;
 	char path[100];
-	sprintf(path,"data/leftaver.txt");
+	sprintf(path,"data/leftsysaver.txt");
 	std::ofstream of(path);
-	sprintf(path,"data/danger.txt");
+	sprintf(path,"data/leftsysdanger.txt");
 	std::ofstream of2(path);
 	while(hw.time<0.4)
 	{
 		hw.evoluation();
 		sum++;
-		if(sum%100==0)
+		if( sum%100==0 )
 		{
 			of<<hw.time<<" "<<hw.avsped<<std::endl;
 			of2<<hw.time<<" "<<hw.dangercol<<std::endl;
@@ -133,7 +134,9 @@ int main(int argc, char *argv[])
 	srand(time(NULL));
 #ifdef GL
 	gl_main(argc,argv);
-#else
+#endif
+
+#ifdef DEBUG
 	debug_main(argc,argv);
 #endif
 }
