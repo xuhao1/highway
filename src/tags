@@ -1,0 +1,76 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BIGCAR	car.h	/^#define BIGCAR /;"	d
+CMD	display.cpp	/^#define CMD$/;"	d	file:
+Ethe	car.cpp	/^#define Ethe /;"	d	file:
+Gravity	car.h	/^#define Gravity /;"	d
+Iteration	highway.cpp	/^void highway::Iteration()$/;"	f	class:highway
+Iteration	highwaysand.cpp	/^void Iteration()$/;"	f
+Iteration4point	highwaysand.cpp	/^int Iteration4point(int i)$/;"	f
+MAXLANE	car.h	/^#define MAXLANE /;"	d
+MAXN	highway.cpp	/^#define MAXN /;"	d	file:
+MAXN	highwaysand.cpp	/^#define MAXN /;"	d	file:
+MEDCAR	car.h	/^#define MEDCAR /;"	d
+SMALLCAR	car.h	/^#define SMALLCAR /;"	d
+SWITCHTIME	car.cpp	/^#define SWITCHTIME /;"	d	file:
+__CAR_H__	car.h	/^#define __CAR_H__$/;"	d
+__USTC_HIGHWAY_H__	highway.h	/^#define __USTC_HIGHWAY_H__$/;"	d
+adapt	car.cpp	/^void car::adapt(std::vector<car>& way,double time,int num)$/;"	f	class:car
+avsped	highway.h	/^	double avsped;$/;"	m	class:highway
+bra	car.h	/^	int bra=0;$/;"	m	class:car
+car	car.h	/^	car(int carclass,int _lane,int _id,int _mind):$/;"	f	class:car
+car	car.h	/^class car$/;"	c
+count	display.cpp	/^double count=-0.5;$/;"	v
+cv	display.py	/^import cv,os$/;"	i
+danger	car.cpp	/^double car::danger(car&fron)$/;"	f	class:car
+dangercol	car.h	/^	double dangercol;$/;"	m	class:car
+dangercol	highway.h	/^	double dangercol;$/;"	m	class:highway
+day	display.cpp	/^static int day = 200; \/\/ day 的变化:从 0 到 359$/;"	v	file:
+debug_main	display.cpp	/^int debug_main(int argc,char *argv[])$/;"	f
+distance	car.cpp	/^double car::distance()$/;"	f	class:car
+drawCar	display.cpp	/^void drawCar(car&c)$/;"	f
+dt	highway.h	/^	double dt=0.00001;$/;"	m	class:highway
+evoluation	highway.cpp	/^void highway::evoluation()$/;"	f	class:highway
+evoluation	highwaysand.cpp	/^void evoluation()$/;"	f
+flow	highway.h	/^	double flow;$/;"	m	class:highway
+getCurrentTime	display.cpp	/^long getCurrentTime()  $/;"	f
+gl_main	display.cpp	/^int gl_main(int argc, char *argv[]) $/;"	f
+highway	highway.h	/^	highway(double _flow):$/;"	f	class:highway
+highway	highway.h	/^class highway$/;"	c
+id	car.h	/^	int id;$/;"	m	class:car
+k	display.py	/^    k=i+1$/;"	v
+lane	car.h	/^	int lane;$/;"	m	class:car
+lasttime	display.cpp	/^long lasttime=0;$/;"	v
+lasw	car.h	/^	double lasw=0;$/;"	m	class:car
+location	car.h	/^	float location;$/;"	m	class:car
+main	display.cpp	/^int main(int argc, char *argv[]) $/;"	f
+main	highwaysand.cpp	/^int main()$/;"	f
+main	test.cpp	/^int main()$/;"	f
+mass	car.h	/^	float mass;\/\/kg$/;"	m	class:car
+maxspeed	car.h	/^	float maxspeed;$/;"	m	class:car
+min	car.cpp	/^double min(double a,double b)$/;"	f
+mind	car.h	/^	int mind;$/;"	m	class:car
+mktr	car.cpp	/^double car::mktr()$/;"	f	class:car
+mu	car.h	/^	float mu;\/\/friction$/;"	m	class:car
+myDisplay	display.cpp	/^void myDisplay(void) $/;"	f
+myIdle	display.cpp	/^void myIdle(void) $/;"	f
+np	highway.h	/^	int np=0;$/;"	m	class:highway
+num	highway.h	/^	int num;$/;"	m	class:highway
+os	display.py	/^import cv,os$/;"	i
+path	display.py	/^    path='\/Users\/xuhao\/Develop\/modeling\/highway\/src\/data\/p'+str(k)+'.png'$/;"	v
+qsort	highway.cpp	/^void highway::qsort(std::vector<car>&a,int l,int r)$/;"	f	class:highway
+randColl	highway.h	/^	int randColl;$/;"	m	class:highway
+road	highwaysand.cpp	/^int road[MAXN][4]={0};$/;"	v
+roadlines	display.cpp	/^void roadlines(void)$/;"	f
+runintdt	car.cpp	/^void car::runintdt(double dt)$/;"	f	class:car
+sandrole	highwaysand.cpp	/^int sandrole[16]={0};$/;"	v
+side	car.cpp	/^#define side /;"	d	file:
+speed	car.h	/^	float speed;$/;"	m	class:car
+temproad	highwaysand.cpp	/^int temproad[MAXN][4]={0};$/;"	v
+time	highway.h	/^	double time;$/;"	m	class:highway
+tr	car.h	/^	double tr;$/;"	m	class:car
+xinway	highway.h	/^	std::vector<car> xinway;$/;"	m	class:highway

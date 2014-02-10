@@ -9,7 +9,7 @@ void highway::evoluation()
 	if( rand()%randColl <1)
 	{
 		num++;
-		xinway.push_back(car(rand()%3,rand()%MAXLANE,num,rand()%10*10000)) ;
+		xinway.push_back(car(rand()%3,rand()%MAXLANE,num,10000)) ;
 	}
 	time+=dt;
 	Iteration();
