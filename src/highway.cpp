@@ -20,13 +20,14 @@ void highway::Iteration()
 	double sum=0;
 	double dsum=0;
 	qsort(xinway,0,xinway.size()-1);
-
+	np=0;
 	for(int i=0;i<xinway.size();i++)
 	{
 		car &c=xinway[i];
 		c.adapt(xinway,time,i);
 		sum+=c.speed;
 		dsum+=c.dangercol;
+		np+=c.bra;
 	}
 	char c;
 

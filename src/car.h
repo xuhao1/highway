@@ -25,6 +25,7 @@ public:
 	float location;
 	float speed;
 	int lane;
+	int bra=0;
 	int id;
 	void runintdt(double dt);
 	void adapt(std::vector<car>&,double time,int num);

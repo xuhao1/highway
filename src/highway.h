@@ -19,6 +19,7 @@ public:
 	int randColl;
 	std::vector<car> xinway;
 	double flow;
+	int np=0;
 	double avsped;
 	highway(double _flow):
 		num(0),xinway(),time(0),flow(_flow)

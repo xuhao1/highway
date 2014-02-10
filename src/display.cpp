@@ -85,20 +85,23 @@ int gl_main(int argc, char *argv[])
 
 int debug_main(int argc,char *argv[])
 {
-	for(int flow=1000;flow<=8000;flow+=1000)
+	for(int flow=500;flow<=10000;flow+=1000)
 	{
 		highway hw(flow);
 		int sum=0;
 		char path[100];
-		sprintf(path,"data/aver%d.txt",flow/1000);
+		sprintf(path,"data/aver%d.txt",flow/500);
 		std::ofstream of(path);
+		sprintf(path,"data/danger%d.txt",flow/500);
+		std::ofstream of2(path);
 		while(hw.time<0.4)
 		{
 			hw.evoluation();
 			sum++;
 			if(sum%100==0)
 			{
-				of<<hw.time<<" "<<hw.dangercol<<std::endl;
+				of<<hw.time<<" "<<hw.avsped<<std::endl;
+				of2<<hw.time<<" "<<hw.dangercol<<std::endl;
 				std::cout<<flow<<" "<<hw.time<<" "<<hw.xinway.size()<<" "<<hw.avsped<<std::endl;
 			}
 		}

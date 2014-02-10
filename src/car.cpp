@@ -38,7 +38,10 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	{
 		car &fron=front[0];
 		dangercol=danger(fron);
+		bra=1;
 	}
+	else
+		bra=0;
 	/*
 	for(int i=num-1;i>=0 && fabs(way[i].location-location)<side;i--)
 	{
