@@ -8,14 +8,13 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	double frontmin=1000;
 	int fp=0;
 
-	/*
 	if(rand()%1000000<1||broken)
 	{
 		speed=0;
 		broken=1;
 		return;
 	}
-	*/
+	//
 	//We assume the car has been sort before
 
 	for(int i=num+1;i<way.size() && way[i].location-location<distance();i++)
@@ -55,6 +54,14 @@ void car::adapt(std::vector<car>& way,double time,int num)
 	*/
 	if (front.size()>0&& (frontmin<=maxspeed) )
 	{
+		if(frontmin<1e-2)
+		{
+			if(lane<MAXLANE-1)
+				lane++;
+			else
+				speed=0;
+			return;
+		}
 		if(lane<MAXLANE-1&&left.size()==0&&fabs(lasw-time)>SWITCHTIME)
 		{
 			lane++;

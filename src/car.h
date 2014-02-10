@@ -21,6 +21,7 @@ class car
 	double danger(car &fr);
 	double tr;
 	double mktr();
+	int broken=0;
 public:
 	float location;
 	float speed;

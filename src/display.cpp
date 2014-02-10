@@ -107,7 +107,27 @@ int debug_main(int argc,char *argv[])
 		}
 	}
 }
-
+int leftright
+{
+	highway hw(2000);
+	int sum=0;
+	char path[100];
+	sprintf(path,"data/leftaver.txt");
+	std::ofstream of(path);
+	sprintf(path,"data/danger.txt");
+	std::ofstream of2(path);
+	while(hw.time<0.4)
+	{
+		hw.evoluation();
+		sum++;
+		if(sum%100==0)
+		{
+			of<<hw.time<<" "<<hw.avsped<<std::endl;
+			of2<<hw.time<<" "<<hw.dangercol<<std::endl;
+			std::cout<<" "<<hw.time<<" "<<hw.xinway.size()<<" "<<hw.avsped<<std::endl;
+		}
+	}
+}
 int main(int argc, char *argv[]) 
 {
 	srand(time(NULL));
