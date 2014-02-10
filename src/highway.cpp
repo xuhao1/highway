@@ -1,5 +1,4 @@
 #include "highway.h"
-#include <omp.h>
 
 //First simulate use Margolus neighbor
 //Sand Rule
@@ -10,7 +9,7 @@ void highway::evoluation()
 	if( rand()%randColl <1)
 	{
 		num++;
-		xinway.push_back( car((rand()%2+1)*50+50,rand()%MAXLANE,num,rand()%10*10000) );
+		xinway.push_back(car(rand()%3,rand()%MAXLANE,num,rand()%10*10000)) ;
 	}
 	time+=dt;
 	Iteration();
@@ -19,6 +18,7 @@ void highway::evoluation()
 void highway::Iteration()
 {
 	double sum=0;
+	double dsum=0;
 	qsort(xinway,0,xinway.size()-1);
 
 	for(int i=0;i<xinway.size();i++)
@@ -26,6 +26,7 @@ void highway::Iteration()
 		car &c=xinway[i];
 		c.adapt(xinway,time,i);
 		sum+=c.speed;
+		dsum+=c.dangercol;
 	}
 	char c;
 
@@ -34,6 +35,7 @@ void highway::Iteration()
 		c.runintdt(dt);
 	}
 	avsped=sum/xinway.size();
+	dangercol=dsum/xinway.size();
 }
 
 void highway::qsort(std::vector<car>&a,int l,int r)

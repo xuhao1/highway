@@ -1,6 +1,7 @@
 #include "car.h"
 #define side 0.01
 #define SWITCHTIME 0.002
+#define Ethe 4e5
 void car::adapt(std::vector<car>& way,double time,int num)
 {
 	std::vector<car> left,front,right;
@@ -33,7 +34,11 @@ void car::adapt(std::vector<car>& way,double time,int num)
 		if(c.lane==this->lane-1&&(c.location-this->location)<distance() )
 			right.push_back(c);
 	}
-
+	if(front.size()>0)
+	{
+		car &fron=front[0];
+		dangercol=danger(fron);
+	}
 	/*
 	for(int i=num-1;i>=0 && fabs(way[i].location-location)<side;i--)
 	{
@@ -117,4 +122,85 @@ void car::runintdt(double dt)
 double car::distance()
 {
 	return 0.0003*speed+0.001;
+}
+
+
+double min(double a,double b)
+{
+	if(a>b)
+		return b;
+	return a;
+}
+double car::danger(car&fron)
+{
+	double vf=fron.speed*3.6;
+	double muf=fron.mu;
+	double mur=mu;
+	double G=(fron.location-location)*1000;
+	double vr=speed*3.6;
+	double t1;
+	double g=Gravity;
+	if(fabs(mur-muf)<1e-3)
+	{
+		t1=-sqrt(   (-vf+g*mur*tr+vr)*(-vf+g*mur*tr+vr)-g*(mur-muf)*(g*mu*tr+2*G))-vf+g*mur*tr+vr;
+		t1/=(g*(mur-muf));
+	}
+	else
+	{
+		t1=G+0.5*mur*g*tr;
+		t1/=(mur*g*tr+vr-vf);
+	}
+	double talpha=vf/(muf*g);
+	double t2=(vf-sqrt(vf*vf-2*(vr*tr-G)*muf*g  )   )/(mur*g);
+	double t3=mur*g*tr+vr-sqrt( (mur*g*tr+vr)*(mur*g*tr+vr) -mur*g*(vf*vf/(muf*g) +2*G+mur*g*tr)  );
+	t3/=mur;
+	double deltav;
+	if( t1>talpha &&tr>talpha )
+	{
+		deltav=vr;
+	}
+	else if( t1>talpha && tr<talpha )
+		deltav=vr-mur*g*t2;
+	else if( t1<talpha && t1<tr )
+		deltav=vr-vf+muf*g*t3;
+	else if( t1<talpha && t1>tr )
+		deltav=vr-mur*g*t1-vf+muf*g*t1;
+	dangercol=min(1, (muf*mur)/(2*muf+2*mur)*deltav*deltav/Ethe   );
+	
+}
+double car::mktr()
+{
+	/*
+	 * <=10  0.48
+	 20    0.65
+	 30    0.76
+	 40    0.89
+	 50    1.01
+	 60    1.14
+	 70    1.30
+	 80    1.49
+	 90    1.78
+	 100   2.40
+	 */
+	int ra;
+	if( ( ra=rand()%101)<=10)
+		tr=0.48;
+	else if(ra<20)
+		tr=0.65;
+	else if(ra<30)
+		tr=0.76;
+	else if(ra<40)
+		tr=0.89;
+	else if(ra<50)
+		tr=1.01;
+	else if(ra<60)
+		tr=1.14;
+	else if(ra<70)
+		tr=1.30;
+	else if(ra<80)
+		tr=1.49;
+	else if(ra<90)
+		tr=1.78;
+	else 
+		tr=2.4;
 }

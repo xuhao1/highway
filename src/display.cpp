@@ -85,7 +85,7 @@ int gl_main(int argc, char *argv[])
 
 int debug_main(int argc,char *argv[])
 {
-	for(int flow=1000;flow<=10000;flow+=1000)
+	for(int flow=1000;flow<=8000;flow+=1000)
 	{
 		highway hw(flow);
 		int sum=0;
@@ -98,7 +98,7 @@ int debug_main(int argc,char *argv[])
 			sum++;
 			if(sum%100==0)
 			{
-				of<<hw.time<<" "<<hw.avsped<<std::endl;
+				of<<hw.time<<" "<<hw.dangercol<<std::endl;
 				std::cout<<flow<<" "<<hw.time<<" "<<hw.xinway.size()<<" "<<hw.avsped<<std::endl;
 			}
 		}

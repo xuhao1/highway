@@ -14,6 +14,7 @@ public:
 	void evoluation();
 	double time;
 	double dt=0.00001;
+	double dangercol;
 	int num;
 	int randColl;
 	std::vector<car> xinway;
@@ -22,7 +23,7 @@ public:
 	highway(double _flow):
 		num(0),xinway(),time(0),flow(_flow)
 	{
-		xinway.push_back( car((rand()%2+1)*50+50,1,num,100000) );
+		xinway.push_back(car( 1,1,num,100000) );
 		randColl =1/(double)(dt*_flow);
 		printf("randcoll:%d\n",randColl);
 	}
